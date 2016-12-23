@@ -2,7 +2,7 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	<definition extends="default" name="example/list">
+	<definition extends="body_default" name="example/list">
 		<put-attribute name="body" value="/WEB-INF/views/example/list.jspx" />
 	</definition>
 </tiles-definitions>

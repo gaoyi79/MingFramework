@@ -36,19 +36,21 @@
 <title><spring:message code="welcome_h3" arguments="${app_name}" /></title>
 </head>
 <body class="tundra spring">
-	<div id="headerWrapper" class="div-left">
-		<tiles:insertAttribute name="header" ignore="true" />
-	</div>
-	<div id="wrapper" class="div-Absolute-Centering">
-		<div>
-			<tiles:insertAttribute name="menu" ignore="true" />
+	<div id="container">
+		<div id="headerWrapper" class="div-left">
+			<tiles:insertAttribute name="header" ignore="true" />
 		</div>
-		<div id="body">
-			<tiles:insertAttribute name="body_content" />
+		<div id="wrapper" class="div-Absolute-Centering">
+			<div>
+				<tiles:insertAttribute name="menu" ignore="true" />
+			</div>
+			<div id="body">
+				<tiles:insertAttribute name="body_content" />
+			</div>
 		</div>
-	</div>
-	<div id="footerWrapper" class="div-bottom">
-		<tiles:insertAttribute name="footer" ignore="true" />
+		<div id="footerWrapper" class="div-bottom">
+			<tiles:insertAttribute name="footer" ignore="true" />
+		</div>
 	</div>
 </body>
 </html>
