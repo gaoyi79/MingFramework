@@ -6,7 +6,9 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:message code="menu_header_text" var="menuHeaderText" />
 	<spring:message code="menu_add_contact" var="menuAddContact" />
-	<spring:url value="/contacts?form" var="addContactUrl" />
-	<h3>${menuHeaderText}</h3>
-	<a href="${addContactUrl}"><h3>${menuAddContact}</h3></a>
+	<spring:url value="/example" var="addContactUrl" />
+	<h3>${menuHeaderText}</h3><p></p>
+	<jsp:useBean id="time" type="java.io.Serializable" beanName="java.util.Date"/>
+	<h3>现在时间：<jsp:expression>time</jsp:expression></h3>
+	<a href="${addContactUrl}" target='bodyFrame'><h3>${menuAddContact}</h3></a>
 </div>

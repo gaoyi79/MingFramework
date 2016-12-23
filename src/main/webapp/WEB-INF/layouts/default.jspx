@@ -7,6 +7,7 @@
 	doctype-system="about:legacy-compat" />
 <jsp:directive.page contentType="text/html;charset=UTF-8" />
 <jsp:directive.page pageEncoding="UTF-8" />
+<jsp:directive.page import="java.util.*"/>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
@@ -42,8 +43,8 @@
 		<div>
 			<tiles:insertAttribute name="menu" ignore="true" />
 		</div>
-		<div id="main">
-			<tiles:insertAttribute name="body" />
+		<div id="body">
+			<tiles:insertAttribute name="body_content" />
 		</div>
 	</div>
 	<div id="footerWrapper" class="div-bottom">
