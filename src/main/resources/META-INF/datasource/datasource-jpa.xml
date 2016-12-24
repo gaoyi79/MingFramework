@@ -37,6 +37,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 		<property name="packagesToScan" value="cn.org.mingframework" />
 		<property name="jpaProperties">
 			<props>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect
 				</prop>
