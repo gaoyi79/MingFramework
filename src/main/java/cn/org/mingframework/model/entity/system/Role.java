@@ -8,14 +8,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "sys_role")
 public class Role implements Serializable {
 	private Long id;
 	private String name;
-	private List<Login> logins = new ArrayList<Login>();
-	private List<AuthorityGroup> groups = new ArrayList<AuthorityGroup>();
+	private List<UserRole> userRoles = new ArrayList<UserRole>();
+	private List<GroupRole> groupRoles = new ArrayList<GroupRole>();
 	
 	private int version;
 
@@ -45,5 +48,23 @@ public class Role implements Serializable {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	@OneToMany(mappedBy = "role")
+	public List<UserRole> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(List<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+
+	@OneToMany(mappedBy = "role")
+	public List<GroupRole> getGroupRoles() {
+		return groupRoles;
+	}
+
+	public void setGroupRoles(List<GroupRole> groupRoles) {
+		this.groupRoles = groupRoles;
 	}
 }

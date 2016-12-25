@@ -15,11 +15,12 @@ import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = { "loginid", "groupid"})})
-public class LoginGroup implements Serializable {
+@Table(name = "sys_usergroup",
+		uniqueConstraints = {@UniqueConstraint(columnNames = { "userid", "groupid"})})
+public class UserGroup implements Serializable {
 	private Long id;
-	private Login login;
-	private AuthorityGroup group;
+	private User user;
+	private Group group;
 	
 	private int version;
 
@@ -34,53 +35,22 @@ public class LoginGroup implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "loginid")
-	public Login getLogin() {
-		return login;
+	@JoinColumn(name = "userid")
+	public User getLogin() {
+		return user;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((group == null) ? 0 : group.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		LoginGroup other = (LoginGroup) obj;
-		if (group == null) {
-			if (other.group != null)
-				return false;
-		} else if (!group.equals(other.group))
-			return false;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		return true;
-	}
-
-	public void setLogin(Login login) {
-		this.login = login;
+	public void setLogin(User user) {
+		this.user = user;
 	}
 
 	@ManyToOne
 	@JoinColumn(name = "groupid")
-	public AuthorityGroup getGroup() {
+	public Group getGroup() {
 		return group;
 	}
 
-	public void setGroup(AuthorityGroup group) {
+	public void setGroup(Group group) {
 		this.group = group;
 	}
 
@@ -92,7 +62,35 @@ public class LoginGroup implements Serializable {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
-	
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((group == null) ? 0 : group.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserGroup other = (UserGroup) obj;
+		if (group == null) {
+			if (other.group != null)
+				return false;
+		} else if (!group.equals(other.group))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
 }

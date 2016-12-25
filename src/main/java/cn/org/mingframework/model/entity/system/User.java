@@ -11,15 +11,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-public class Login implements Serializable {
+@Table(name = "sys_user")
+public class User implements Serializable {
 	private Long id;
 	private String userName;
 	private String password;
-	private Set<LoginGroup> loginGroups = new HashSet<LoginGroup>();
-	private int verison;
+	private Set<UserGroup> loginGroups = new HashSet<UserGroup>();
+	private int version;
 	
 	@Id
 	@GeneratedValue
@@ -50,16 +52,16 @@ public class Login implements Serializable {
 	}
 	
 	@Version
-	public int getVerison() {
-		return verison;
+	public int getVersion() {
+		return version;
 	}
 	
-	public void setVerison(int verison) {
-		this.verison = verison;
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	@OneToMany(mappedBy = "login", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	public Set<LoginGroup> getGroups() {
+	public Set<UserGroup> getGroups() {
 		return loginGroups;
 	}
 
@@ -79,7 +81,7 @@ public class Login implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Login other = (Login) obj;
+		User other = (User) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -88,7 +90,7 @@ public class Login implements Serializable {
 		return true;
 	}
 
-	public void setGroups(Set<LoginGroup> loginGroups) {
+	public void setGroups(Set<UserGroup> loginGroups) {
 		this.loginGroups = loginGroups;
 	}
 }

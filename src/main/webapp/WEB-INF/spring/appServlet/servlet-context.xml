@@ -19,7 +19,7 @@ http://www.springframework.org/schema/context/spring-context.xsd
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jspx" />
 	</beans:bean-->
-	<context:component-scan base-package="cn.org.mingframework" />
+	<!--context:component-scan base-package="cn.org.mingframework" /-->
 	<interceptors>
 		<beans:bean
 			class="org.springframework.web.servlet.theme.ThemeChangeInterceptor" />

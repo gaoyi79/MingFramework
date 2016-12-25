@@ -1,8 +1,7 @@
-package cn.org.mingframework.model.entity.hr;
+package cn.org.mingframework.model.entity.system;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,11 +11,11 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "hr_emploee")
-public class Emploee implements Serializable {
+@Table(name = "sys_grouprole")
+public class GroupRole implements Serializable {
 	private Long id;
-	private String name;
-	private Department department;
+	private Group group;
+	private Role role;
 	
 	private int version;
 
@@ -30,23 +29,24 @@ public class Emploee implements Serializable {
 		this.id = id;
 	}
 
-	@Column(length = 20)
-	public String getName() {
-		return name;
+	@ManyToOne
+	@JoinColumn(name = "groupid")
+	public Group getGroup() {
+		return group;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "departmentid")
-	public Department getDepartment() {
-		return department;
+	@JoinColumn(name = "roleid")
+	public Role getRole() {
+		return role;
 	}
 
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Version
@@ -57,4 +57,6 @@ public class Emploee implements Serializable {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	
+	
 }
