@@ -7,9 +7,10 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.org.mingframework.dao.interfaces.EntityDao;
 
@@ -30,11 +31,13 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 	public EntityDaoImpl() {
 	}
 
+	@Transactional(readOnly = true)
 	public List<T> findAll() {
 		return entityManager.
-				createQuery("from "+simpleName+" c").getResultList();
+				createQuery("from "+simpleName+" e").getResultList();
 	}
 
+	@Transactional(readOnly = true)
 	public T findById(Long id) {
 		return (T)entityManager.
 				createQuery("from "+simpleName+ " e where e.id=:id").
@@ -67,6 +70,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 		}
 	}
 
+	@Transactional(readOnly = true)
 	public List<T> findByIdList(List<Long> idList) {
 		return entityManager.
 				createQuery("from "+simpleName+" e where e.id in (:idlist)").
@@ -93,10 +97,12 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 		return query;
 	}
 	
+	@Transactional(readOnly = true)
 	public List<T> findByCondition(String queryString, Map<String, Object> parameters) {
 		return queryByCondition(queryString, parameters).getResultList();
 	}
 
+	@Transactional(readOnly = true)
 	public List<T> findByConditionWithPage(String queryString, Map<String, Object> parameters, int firstResult, int maxResults) {
 		return queryByCondition(queryString, parameters).
 				setFirstResult(firstResult).
@@ -104,9 +110,10 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 				getResultList();
 	}
 
+	@Transactional(readOnly = true)
 	public int count() {
 		return entityManager.
-				createQuery("from "+simpleName+" c").
+				createQuery("from "+simpleName+" e").
 				getResultList().size();
 	}
 }
