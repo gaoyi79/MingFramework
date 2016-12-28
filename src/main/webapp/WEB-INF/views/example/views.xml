@@ -31,7 +31,7 @@
 	</definition>
 
 	<!-- 主页面<先执行，布局框架> -->
-	<definition name="mainView" extends="baseLayout">
+	<definition name="mainView1" extends="baseLayout">
 		<put-attribute name="title" value="主页面" />
 	</definition>
 

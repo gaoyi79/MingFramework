@@ -18,9 +18,8 @@
 <link rel="stylesheet" type="text/css" media="screen"
 	href="${app_css_url}" />
 	</head>
-	<h1>${labelContactList}</h1><p></p>
-	<h1>${entityName}</h1>
-	<jsp:expression>entityName</jsp:expression> 
+	<h5>${labelContactList}</h5><p/>
+	<h5>${entityName}</h5><p/>
 	<c:if test="${not empty users}">
 		<table>
 			<thead>
@@ -33,7 +32,7 @@
 			<tbody>
 				<c:forEach items="${users}" var="user">
 					<tr>
-						<td>${user.name}</td>
+						<td>${user.userName}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
