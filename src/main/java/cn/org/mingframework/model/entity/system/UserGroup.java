@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "sys_usergroup",
+@Table(name = "SYS_UserGroup",
 		uniqueConstraints = {@UniqueConstraint(columnNames = { "userid", "groupid"})})
 public class UserGroup implements Serializable {
 	private Long id;

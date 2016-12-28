@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "sys_db_entity")
+@Table(name = "SYS_DB_Entity")
 public class EntityDescription implements Serializable {
 	private Long id;
 	private String entityName;

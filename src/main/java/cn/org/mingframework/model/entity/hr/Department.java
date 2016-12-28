@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "hr_department")
+@Table(name = "HR_Department")
 public class Department implements Serializable {
 	private Long id;
 	private String name;

@@ -8,14 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "SYS_UserRole")
-public class UserRole implements Serializable {
+@Table(name = "SYS_RoleResource", 
+		uniqueConstraints = { @UniqueConstraint(columnNames = { "roleid", "resourceid" }) })
+public class RoleResource implements Serializable {
 	private Long id;
-	private User user;
 	private Role role;
+	private Resource resource;
+	private Authority authority;
 	
 	private int version;
 
@@ -30,16 +33,6 @@ public class UserRole implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "userid")
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	@ManyToOne
 	@JoinColumn(name = "roleid")
 	public Role getRole() {
 		return role;
@@ -47,6 +40,26 @@ public class UserRole implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "resourceid")
+	public Resource getResource() {
+		return resource;
+	}
+
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "authorityid")
+	public Authority getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Authority authority) {
+		this.authority = authority;
 	}
 
 	@Version
@@ -57,5 +70,6 @@ public class UserRole implements Serializable {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	
 	
 }

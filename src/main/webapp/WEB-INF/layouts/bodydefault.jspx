@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
-		<tiles:insertAttribute name="body_default" ignore="true" />
+	<div height="300px">
+		<tiles:insertAttribute name="body" ignore="true" />
 	</div>
 </body>
 </html>

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "sys_user")
+@Table(name = "SYS_User")
 public class User implements Serializable {
 	private Long id;
 	private String userName;

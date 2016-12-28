@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "sys_grouprole")
+@Table(name = "SYS_GroupRole")
 public class GroupRole implements Serializable {
 	private Long id;
 	private Group group;

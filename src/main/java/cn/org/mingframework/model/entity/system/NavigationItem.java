@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "sys_navigation")
+@Table(name = "SYS_Navigation")
 public class NavigationItem implements Serializable {
 	private Long id;
 	private NavigationItem parent;

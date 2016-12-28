@@ -1,22 +1,27 @@
-package cn.org.mingframework.model.entity.hr;
+package cn.org.mingframework.model.entity.system;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "HR_Emploee")
-public class Emploee implements Serializable {
+@Table(name = "SYS_Resource")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "ResourceType")
+@DiscriminatorValue(value = "Resource")
+public class Resource implements Serializable {
 	private Long id;
 	private String name;
-	private Department department;
+	private String url;
 	
 	private int version;
 
@@ -39,14 +44,13 @@ public class Emploee implements Serializable {
 		this.name = name;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "departmentid")
-	public Department getDepartment() {
-		return department;
+	@Column(length = 100)
+	public String getUrl() {
+		return url;
 	}
 
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Version
@@ -57,4 +61,5 @@ public class Emploee implements Serializable {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	
 }

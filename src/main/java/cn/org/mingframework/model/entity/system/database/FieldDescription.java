@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "sys_db_field")
+@Table(name = "SYS_DB_Field")
 public class FieldDescription {
 	private Long id;
 	private String fieldName;

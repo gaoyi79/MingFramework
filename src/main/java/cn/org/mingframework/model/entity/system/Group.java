@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "sys_group")
+@Table(name = "SYS_Group")
 public class Group implements Serializable {
 	private Long id;
 	private String name;

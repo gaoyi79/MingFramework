@@ -2,7 +2,46 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+	<!--
 	<definition extends="body_default" name="example/list">
 		<put-attribute name="body" value="/WEB-INF/views/example/list.jspx" />
+	</definition>
+	<definition extends="body_default" name="list">
+		<put-attribute name="body" value="/WEB-INF/views/example/list2.jspx" />
+	</definition>
+	-->
+	
+	
+	<!-- tiles frame example -->
+	<!-- 定义一个基础模板页 -->
+	<definition name="template_base" template="/WEB-INF/views/tilesexample/main/template.jsp"></definition>
+
+	<!-- 不继承直接引用也行 -->
+	<definition name="baseLayout" extends="template_base">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/tilesexample/main/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/tilesexample/main/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/tilesexample/main/content-right.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/tilesexample/main/footer.jsp" />
+	</definition>
+
+	<!-- 右侧内容模板定义 -->
+	<definition name="contentLayout" template="/WEB-INF/views/tilesexample/main/content.jsp">
+		<put-attribute name="body" value="/WEB-INF/views/tilesexample/main/content-right.jsp" />
+	</definition>
+
+	<!-- 主页面<先执行，布局框架> -->
+	<definition name="mainView" extends="baseLayout">
+		<put-attribute name="title" value="主页面" />
+	</definition>
+
+	<definition name="one" extends="contentLayout">
+		<put-attribute name="title" value="用户管理" />
+		<put-attribute name="body" value="/WEB-INF/views/tilesexample/content/one.jsp" />
+	</definition>
+
+	<definition name="two" extends="contentLayout">
+		<put-attribute name="title" value="用户管理" />
+		<put-attribute name="body" value="/WEB-INF/views/tilesexample/content/two.jsp" />
 	</definition>
 </tiles-definitions>
