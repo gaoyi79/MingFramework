@@ -35,9 +35,9 @@
 	htmlEscape="false" />
 <title><spring:message code="welcome_h3" arguments="${app_name}" /></title>
 </head>
-<body class="tundra spring">
-	<div id="container">
-		<div id="headerWrapper" class="div-left">
+<body >
+	<div class="mainDiv">
+		<div id="headerWrapper" class="headDiv">
 			<tiles:insertAttribute name="header" ignore="true" />
 		</div>
 		<div id="wrapper" class="div-Absolute-Centering">
