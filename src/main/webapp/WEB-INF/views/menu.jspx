@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div id="menu" xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	xmlns:spring="http://www.springframework.org/tags">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:message code="menu_header_text" var="menuHeaderText" />
 	<spring:message code="menu_add_contact" var="menuAddContact" />
 	<spring:url value="/example" var="addContactUrl" />
 	<spring:url value="/list/user" var="listUserUrl" />
-	<h3>${menuHeaderText}</h3><p></p>
+	<spring:url value="/new/user" var="newUserUrl" />
+	<p>${menuHeaderText}</p>
 	<jsp:useBean id="time" type="java.io.Serializable" beanName="java.util.Date"/>
-	<h3>现在时间：<jsp:expression>time</jsp:expression></h3>
-	<a href="${addContactUrl}" target='bodyFrame'><h3>${menuAddContact}</h3></a>
-	<a href="${listUserUrl}" target='bodyFrame'><h3>User List</h3></a>
+	<p>现在时间：<jsp:expression>time</jsp:expression></p>
+	<a href="${addContactUrl}" target='bodyFrame'><p>${menuAddContact}</p></a>
+	<a href="${listUserUrl}" target='bodyFrame'><p>User List</p></a>
+	<a href="${newUserUrl}" target='bodyFrame'><p>User Modify</p></a>
 </div>

@@ -35,4 +35,8 @@
 	<definition name="list"  extends="content">
 		<put-attribute name="body" value="/WEB-INF/views/example/list2.jspx"></put-attribute>
 	</definition>
+	
+	<definition name="new"  extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/example/edit.jspx"></put-attribute>
+	</definition>
 </tiles-definitions>

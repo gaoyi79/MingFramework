@@ -1,2 +1,22 @@
+/*
+//ver 1
 div.mainDiv { height:100% ; width:100%; position:absolute;}
+div.mainHeadDiv { height:15% ; width:100%; position:absolute;}
+div.mainCenterDiv { height:70% ; width:100%; position:absolute;}
+div.mainFooterDiv { height:15% ; width:100%; position:absolute;}
+div.mainCenterMenuDiv { height:100% ; width:20%; position:absolute;}
+div.mainCenterBodyDiv { height:100% ; width:80%; position:absolute;}
 body { margin:0px; padding:0px; overflow:hidden;}
+*/
+
+*{ margin: 0;padding: 0; border-width: 0px; border-style:none; font-family: Arial; }
+body { margin:0px; padding:0px; overflow:hidden; height:100% ; width:100%;}
+div{ margin:0px; padding:0px; overflow:hidden; background-color: gray; height:100% ; width:100%; }
+div.mainDiv { height: auto;}
+div.mainHeadDiv { height:15%; max-height : 80px; min-height : 40px;}
+div.mainCenterDiv { height:auto; max-height : 100%; min-height : 70%;}
+div.mainFooterDiv { height:15% ; max-height : 80px; min-height : 40px;}
+div.mainCenterMenuDiv { width:19%; float: left;}
+div.mainCenterBodyDiv { width:80%; float: left;}
+div.max { height: auto;}
+iframe { height:100% ; width:100%;}

@@ -30,6 +30,23 @@ public class BasicController {
 		mv.addObject("entityName", entityName);
 		return mv;
 	}
+
+	@RequestMapping(value = {"/new/{entityname}", "/modify/{entityname}"})
+	public ModelAndView newEntity(@PathVariable ( "entityname" ) String entityName) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("new");
+		List<User> users = new ArrayList<User>();
+		for(int i = 0;i<=10;i++){
+			User user = new User();
+			user.setUserName("user"+i);
+			
+			users.add(user);
+		}
+		mv.addObject("users", users);
+		mv.addObject("entityName", entityName);
+		return mv;
+	}
 	
 	@RequestMapping(value = "/main*")
 	public String mainView(Model model){
