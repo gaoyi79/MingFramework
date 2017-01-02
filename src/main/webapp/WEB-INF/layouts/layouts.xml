@@ -39,4 +39,12 @@
 	<definition name="new"  extends="content">
 		<put-attribute name="body" value="/WEB-INF/views/example/edit.jspx"></put-attribute>
 	</definition>
+	
+	
+	<definition name="page"  extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/example/page.jspx"></put-attribute>
+	</definition>
+	<definition name="article"  extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/example/article.jspx"></put-attribute>
+	</definition>
 </tiles-definitions>

@@ -21,7 +21,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 	private Class genericClass;
 	private String simpleName;
 
-	@PersistenceContext
+	@PersistenceContext(unitName="emf")
 	private EntityManager entityManager;
 
 	public EntityDaoImpl(Class clazz) {

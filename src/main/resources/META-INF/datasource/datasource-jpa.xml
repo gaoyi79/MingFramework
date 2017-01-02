@@ -13,6 +13,8 @@ http://www.springframework.org/schema/data/jpa
 http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 http://www.springframework.org/schema/tx
 http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- MySQL数据源 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -23,18 +25,19 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="emf" />
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />
-		
-	<bean id="emf"
+	
+	<bean id="entityManagerFactory" autowire="byName"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="entityManagerFactory" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
-		<property name="packagesToScan" value="cn.org.mingframework" />
+		<property name="packagesToScan" value="cn.org.mingframework.model" />
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
@@ -48,7 +51,48 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 			</props>
 		</property>
 	</bean>
+	
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	
+	<bean id="dataSourceMsSQL"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url"
+			value="jdbc:sqlserver://localhost:1433;database=mydb;integratedSecurity=true;" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+	</bean>
+		
+	<bean id="emfMsSQL" autowire="byName"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="unitMsSQL" />
+		<property name="dataSource" ref="dataSourceMsSQL" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="packagesToScan" value="cn.org.mingframework.control.additional" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<prop key="hibernate.max_fetch_depth">3</prop>
+				<prop key="hibernate.jdbc.fetch_size">50</prop>
+				<prop key="hibernate.jdbc.batch_size">10</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="transactionManagerMsSQL" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emfMsSQL" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManagerMsSQL" />
+	
 	<context:annotation-config />
-	<jpa:repositories base-package="cn.org.mingframework"
-		entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager" />
+	<jpa:repositories base-package="cn.org.mingframework,model"
+		entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
+	<jpa:repositories base-package="cn.org.mingframework.control.additional"
+		entity-manager-factory-ref="emfMsSQL" transaction-manager-ref="transactionManagerMsSQL" />
 </beans>

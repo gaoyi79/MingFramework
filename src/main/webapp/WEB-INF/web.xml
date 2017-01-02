@@ -29,6 +29,10 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<filter>
 		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+		<init-param>  
+       		<param-name>persistenceUnitName</param-name>  
+            <param-value>emf</param-value>  
+        </init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>

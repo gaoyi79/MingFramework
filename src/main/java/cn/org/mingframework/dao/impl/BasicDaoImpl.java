@@ -15,7 +15,7 @@ import cn.org.mingframework.dao.interfaces.BasicDao;
 public class BasicDaoImpl<T> implements BasicDao {
 	private Class entityClass;
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="emf")
 	private EntityManager em;
 	//@Autowired
 	//private CrudRepository<T, Long> repository;

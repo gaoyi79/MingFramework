@@ -13,22 +13,23 @@ version="2.0">
 <spring:message code="label_contact_birth_date" var="labelContactBirthDate"/>
 <spring:message code="label_contact_description" var="labelContactDescription"/>
 <spring:message code="label_contact_photo" var="labelContactPhoto"/>
-<spring:eval expression="contact.id == null ? labelContactNew:labelContactUpdate"
+<spring:eval expression="user.id == null ? labelContactNew:labelContactUpdate"
 var="formTitle"/>
-<h1>${formTitle}</h1>
+<p>${formTitle}</p>
 <div id="contactUpdate">
-<form:form modelAttribute="contact" id="contactUpdateForm" method="post">
+<form:form modelAttribute="user" id="contactUpdateForm" method="post">
 <c:if test="${not empty message}">
 <div id="message" class="${message.type}">${message.message}</div>
 </c:if>
-<form:label path="firstName">
+<form:label path="userName">
 ${labelContactFirstName}*
 </form:label>
-<form:input path="firstName" />
+<form:input id="userName" path="userName" />
 <div>
-<form:errors path="firstName" cssClass="error" />
+<form:errors path="userName" cssClass="error" />
 </div>
 <p/>
+<!-- 
 <form:label path="lastName">
 ${labelContactLastName}*
 </form:label>
@@ -53,9 +54,13 @@ ${labelContactDescription}
 <form:errors path="description" cssClass="error" />
 </div>
 <p/>
+-->
 <form:hidden path="version" />
-<button type="submit">Save</button>
-<button type="reset">Reset</button>
+<button id="save" type="submit">Save</button>
+<button id="reset" type="reset">Reset</button>
 </form:form>
 </div>
+<script>
+	${"#save"}.Button();
+</script>
 </div> 
