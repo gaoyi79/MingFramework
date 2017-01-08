@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.common.collect.Lists;
 
 @Controller
 public class AdditionalControler {
@@ -40,9 +43,11 @@ public class AdditionalControler {
 	
 	private ModelAndView getPageModelAndView(int pageIndex){
 		ModelAndView mv = new ModelAndView();
-		List<Article> articles = additionalService.listArticle(pageIndex);
+		Page<Article> articlePage = additionalService.listArticle(pageIndex);
 		mv.setViewName("page");
-		mv.addObject("articles", articles);
+		mv.addObject("articles", Lists.newArrayList(articlePage.iterator()));
+		mv.addObject("maxPage", articlePage.getTotalPages());
+		mv.addObject("currentPage", articlePage.getNumber());
 		return mv;
 	}
 	
@@ -66,6 +71,9 @@ public class AdditionalControler {
 		File dir = new File(IMAGE_PATH + articleId);
 		
 		File[]	files = dir.listFiles();
+		if(files == null)
+			return;
+		
 		for(File file : files){
 			if(file.isFile() && file.getName().subSequence(0, patten.length()).equals(patten)){
 				FileInputStream inputStream = new FileInputStream(IMAGE_PATH +  articleId + "\\" + file.getName());

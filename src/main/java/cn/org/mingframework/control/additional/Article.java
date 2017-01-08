@@ -6,6 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 @Entity
 public class Article implements Serializable{
@@ -16,7 +21,8 @@ public class Article implements Serializable{
 	private String byUser;
 	private int downloaded;
 	private int grade;
-	
+	private DateTime createDate;
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -77,6 +83,17 @@ public class Article implements Serializable{
 	
 	public void setGrade(int grade) {
 		this.grade = grade;
+	}
+	
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "by_date")
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	public DateTime getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(DateTime createDate) {
+		this.createDate = createDate;
 	}
 	
 	
