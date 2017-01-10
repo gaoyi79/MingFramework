@@ -17,6 +17,7 @@ import javax.persistence.Version;
 public class EntityDescription implements Serializable {
 	private Long id;
 	private String entityName;
+	private String className;
 	private String entityDescription;
 	private List<FieldDescription> fieldDescription = new ArrayList<FieldDescription>();
 
@@ -32,13 +33,22 @@ public class EntityDescription implements Serializable {
 		this.id = id;
 	}
 
-	@Column(length = 20)
+	@Column(length = 40)
 	public String getEntityName() {
 		return entityName;
 	}
 
 	public void setEntityName(String entityName) {
 		this.entityName = entityName;
+	}
+
+	@Column(length = 150)
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
 	@Column(length = 100)
@@ -67,6 +77,4 @@ public class EntityDescription implements Serializable {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
-	
 }
