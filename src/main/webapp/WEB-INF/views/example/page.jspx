@@ -22,10 +22,10 @@
 	${currentPage}---${maxPage}<p/>
 	${Math.max(Long(1), currentPage - 10)}------${Math.min(Long(maxPage), currentPage + 10)}<p/>
 	<p />
-	<c:forEach var="i" begin="${Math.max(Long(0), currentPage - 10)}" end="${Math.min(Long(maxPage), currentPage + 10)}">
-		<c:if test="${currentPage == i}">${i}&nbsp;&nbsp;</c:if>
+	<c:forEach var="i" begin="${Math.max(Long(1), currentPage - 10)}" end="${Math.min(Long(maxPage), currentPage + 10)}">
+		<c:if test="${currentPage == i}">${i}&#160;&#160;</c:if>
 		<c:if test="${currentPage != i}">
-			<a href="${request.getContextPath()}/page/id=${i}">${i}&nbsp;&nbsp;</a>
+			<a href="${request.getContextPath()}/page/id=${i}">${i}&#160;&#160;</a>
 		</c:if>
 	</c:forEach>
 	<c:if test="${not empty articles}">
