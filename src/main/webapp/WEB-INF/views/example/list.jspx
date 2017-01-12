@@ -18,6 +18,7 @@
 <link rel="stylesheet" type="text/css" media="screen"
 	href="${app_css_url}" />
 	</head>
+	${request.getContextPath()}<p/>
 	<h1>${labelContactList}</h1>
 	<c:if test="${not empty contacts}">
 		<table>
