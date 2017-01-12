@@ -18,6 +18,7 @@ public class EntityDescription implements Serializable {
 	private Long id;
 	private String entityName;
 	private String className;
+	private String tableName;
 	private String entityDescription;
 
 	private List<FieldDescription> fieldDescription = new ArrayList<FieldDescription>();
@@ -50,6 +51,15 @@ public class EntityDescription implements Serializable {
 
 	public void setClassName(String className) {
 		this.className = className;
+	}
+
+	@Column(length = 30)
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
 
 	@Column(length = 100)
