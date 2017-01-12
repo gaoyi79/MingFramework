@@ -7,7 +7,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
 import org.springframework.core.io.ClassPathResource;
@@ -22,25 +23,15 @@ import cn.org.mingframework.model.entity.system.database.EntityDescription;
 
 @Service
 public class EntityScan {
-	private String packageName = "cn.org.mingframework.model.entity";
+	private String packageName = "cn/org/mingframework/model/entity";
 	
-	@PersistenceContext(unitName = "emf")
-	private EntityManager em;
+	@PersistenceUnit(unitName = "emf")
+	EntityManagerFactory emf;
 	
 	@PostConstruct
 	public void scan() throws IOException{
-		System.out.println("This will be loaded when app is start.");
+		System.out.println("This will be executed when app is up.");
 		
-		//ResourcePatternResolver rpr = new PathMatchingResourcePatternResolver();
-		//Resource[] resources = rpr.getResources("classpath*: "+ packageName + "/**/*.class");
-		/*
-		for(Resource resource : resources){
-			String className = resource.getURL().getPath();
-			className = className.split("(classes/)|(!/)")[1];
-			className = className.replace("/", ".").replace(".class", "");
-			System.out.println(resource.getURL().getPath()+"   "+ className);
-		}
-		*/
 		/*
 		ClassPathResource res = new ClassPathResource("cn.org.mingframework.model.entity");
 		List files = new ArrayList();
@@ -51,31 +42,30 @@ public class EntityScan {
 	
 	@PreDestroy
 	public void destroy(){
-		System.out.println("This will be loaded when app is shutdown.");
+		System.out.println("This will be execute when app is down.");	
 	}
 	
-	private List<EntityDescription> findAllEntity() throws IOException{
-		Query query = em.createQuery("select e from EntityDescription e");
-		List<EntityDescription> entities = query.getResultList();
-		List<EntityDescription> localEntities = findAllEntityLocal();
-		for(EntityDescription entity : entities){
-			
-		}
+	public void resetEntities(){
 		
-		return entities;
 	}
 	
-	private List<EntityDescription> findAllEntityLocal() throws IOException{
+	private List<EntityDescription> loadEntitiesFromDB(){
+		Query query = emf.createEntityManager().createNamedQuery("select e from EntityDescription e");
+		return query.getResultList();
+	}
+	
+	private List<EntityDescription> loadEntitiesFromEntity() throws IOException{
 		List<EntityDescription> entities = new ArrayList<EntityDescription>();
 		
 		ResourcePatternResolver rpr = new PathMatchingResourcePatternResolver();
-		Resource[] resources = rpr.getResources("classpath*: "+ packageName + "/**/*.class");
-
+		Resource[] resources = rpr.getResources("classpath*:" + packageName + "/**/*.class");
+		
 		for(Resource resource : resources){
+			EntityDescription entity = new EntityDescription();
 			String className = resource.getURL().getPath();
 			className = className.split("(classes/)|(!/)")[1];
 			className = className.replace("/", ".").replace(".class", "");
-			EntityDescription entity = new EntityDescription();
+			
 			entity.setClassName(className);
 			entity.setEntityName(resource.getFilename().replace(".class", ""));
 			

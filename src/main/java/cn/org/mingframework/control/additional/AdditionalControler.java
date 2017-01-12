@@ -30,15 +30,15 @@ public class AdditionalControler {
 	AdditionalService additionalService;
 	
 	@RequestMapping(value = "/page")
-	public ModelAndView getPage()
+	public ModelAndView getPage(HttpServletRequest request)
 	{
-		return getPageModelAndView(1);
+		return getPageModelAndView(1).addObject("request", request);
 	}
 	
 	@RequestMapping(value = "/page/id={pageindex}")
-	public ModelAndView getPage(@PathVariable ( "pageindex" ) int pageIndex)
+	public ModelAndView getPage(@PathVariable ( "pageindex" ) int pageIndex,HttpServletRequest request)
 	{
-		return getPageModelAndView(pageIndex);
+		return getPageModelAndView(pageIndex).addObject("request", request);
 	}
 	
 	private ModelAndView getPageModelAndView(int pageIndex){
@@ -46,18 +46,19 @@ public class AdditionalControler {
 		Page<Article> articlePage = additionalService.listArticle(pageIndex);
 		mv.setViewName("page");
 		mv.addObject("articles", Lists.newArrayList(articlePage.iterator()));
-		mv.addObject("maxPage", articlePage.getTotalPages());
-		mv.addObject("currentPage", articlePage.getNumber());
+		mv.addObject("maxPage", articlePage.getTotalPages() + 1);
+		mv.addObject("currentPage", articlePage.getNumber() + 1);
 		return mv;
 	}
 	
 	@RequestMapping(value = "/article/id={articleid}")
-	public ModelAndView getArticle(@PathVariable ( "articleid" ) String articleId) throws NamingException
+	public ModelAndView getArticle(@PathVariable ( "articleid" ) String articleId,HttpServletRequest request) throws NamingException
 	{
 		ModelAndView mv = new ModelAndView();
 		List<Image> images = additionalService.listImage(articleId);
 		mv.setViewName("article");
 		mv.addObject("images", images);
+		mv.addObject("request", request);
 		return mv;
 	}
 	
