@@ -39,7 +39,13 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
-		<property name="packagesToScan" value="cn.org.mingframework.model" />
+		<!--property name="packagesToScan" value="cn.org.mingframework.model" /-->
+		<property name="packagesToScan">
+			<array>
+				<value>cn.org.mingframework.model</value>
+				<value>cn.org.mingframework.service</value>
+			</array>
+		</property>  
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -22,7 +23,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 	private String simpleName;
 
 	@PersistenceContext(unitName="emf")
-	private EntityManager entityManager;
+	private EntityManager em;
 
 	public EntityDaoImpl(Class clazz) {
 		genericClass = clazz;
@@ -30,28 +31,34 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 	
 	public EntityDaoImpl() {
 	}
+	
+	private EntityManager getEntityManager(){
+		return em;//.createEntityManager();
+	}
 
 	@Transactional(readOnly = true)
 	public List<T> findAll() {
-		return entityManager.
+		return getEntityManager().
 				createQuery("from "+simpleName+" e").getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	public T findById(Long id) {
-		return (T)entityManager.
+		return (T)getEntityManager().
 				createQuery("from "+simpleName+ " e where e.id=:id").
 				setParameter("id", id).
 				getSingleResult();
 	}
 
 	public T save(T entity) {
-		return (T) entityManager.merge(entity);
+		EntityManager em = getEntityManager();
+		em.persist(entity);
+		return entity;
 	}
 
 	public void delete(T entity) {
 		if(entity != null){
-			entityManager.remove(entity);
+			getEntityManager().remove(entity);
 		}
 	}
 
@@ -72,7 +79,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 
 	@Transactional(readOnly = true)
 	public List<T> findByIdList(List<Long> idList) {
-		return entityManager.
+		return getEntityManager().
 				createQuery("from "+simpleName+" e where e.id in (:idlist)").
 				setParameter("idlist", idList).
 				getResultList();
@@ -85,7 +92,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 	}
 
 	private Query queryByCondition(String queryString, Map<String, Object> parameters){
-		Query query = entityManager.
+		Query query = getEntityManager().
 				createQuery(queryString);
 		
 		Iterator entries = parameters.entrySet().iterator();
@@ -112,7 +119,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
 
 	@Transactional(readOnly = true)
 	public int count() {
-		return entityManager.
+		return getEntityManager().
 				createQuery("from "+simpleName+" e").
 				getResultList().size();
 	}
