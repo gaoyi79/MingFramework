@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -23,14 +24,16 @@ import com.google.common.collect.Lists;
 
 import cn.org.mingframework.dao.impl.EntityDaoImpl;
 import cn.org.mingframework.dao.interfaces.EntityDao;
+import cn.org.mingframework.dao.repository.EntityRepository;
+import cn.org.mingframework.dao.repository.EntityService;
 import cn.org.mingframework.model.entity.system.database.EntityDescription;
 
 @Service
 public class EntityScan {
 	private String packageName = "cn/org/mingframework/model/entity";
-	
-	@PersistenceUnit(unitName = "emf")
-	EntityManagerFactory emf;
+
+	@Autowired
+	private EntityService<EntityDescription> entityService;
 	
 	@PostConstruct
 	public void scan() throws IOException, ClassNotFoundException{
@@ -59,13 +62,11 @@ public class EntityScan {
 			System.out.print("; Table Name:" + entity.getTableName());
 		}
 
-		EntityDao<EntityDescription> entityDao = new EntityDaoImpl<EntityDescription>(EntityDescription.class);
-		entityDao.save(entities);
+		entityService.save(entities);
 	}
 	
 	private List<EntityDescription> loadEntitiesFromDB(){
-		Query query = emf.createEntityManager().createNamedQuery("select e from EntityDescription e");
-		return query.getResultList();
+		return Lists.newArrayList(entityService.findAll());
 	}
 	
 	private List<EntityDescription> loadEntitiesFromEntity() throws IOException, ClassNotFoundException{
