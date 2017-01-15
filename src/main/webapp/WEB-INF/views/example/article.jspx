@@ -13,7 +13,7 @@
 <body>
 	<c:if test="${not empty images}">
 		<c:forEach items="${images}" var="image">
-			<img src="../showimage/articleid=${image.articleId}&amp;item=${image.item}"/><p/>
+			<img src="${request.getContextPath()}/showimage/articleid=${image.articleId}&amp;item=${image.item}"/><p/>
 		</c:forEach>
 	</c:if>
 </body>

@@ -1,4 +1,4 @@
-package cn.org.mingframework.dao.repository;
+package cn.org.mingframework.dao.interfaces;
 
 public interface EntityService<T> {
 	T save(T entity);//保存单个实体

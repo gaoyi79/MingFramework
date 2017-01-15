@@ -23,22 +23,25 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 
 import cn.org.mingframework.dao.impl.EntityDaoImpl;
+import cn.org.mingframework.dao.interfaces.BaseService;
 import cn.org.mingframework.dao.interfaces.EntityDao;
-import cn.org.mingframework.dao.repository.EntityRepository;
-import cn.org.mingframework.dao.repository.EntityService;
+import cn.org.mingframework.dao.interfaces.EntityService;
 import cn.org.mingframework.model.entity.system.database.EntityDescription;
 
-@Service
+//@Service
 public class EntityScan {
 	private String packageName = "cn/org/mingframework/model/entity";
 
-	@Autowired
-	private EntityService<EntityDescription> entityService;
+	//@Autowired
+	//private EntityService<EntityDescription> entityService;
+	
+	//@Autowired
+	//private BaseService entityDescriptionService;
 	
 	@PostConstruct
 	public void scan() throws IOException, ClassNotFoundException{
 		System.out.println("This will be executed when app is up.");
-		resetEntities();
+		//resetEntities();
 		
 		/*
 		ClassPathResource res = new ClassPathResource("cn.org.mingframework.model.entity");
@@ -60,13 +63,14 @@ public class EntityScan {
 			System.out.print("Entity Name:" + entity.getEntityName());
 			System.out.print("; Class Name:" + entity.getClassName());
 			System.out.print("; Table Name:" + entity.getTableName());
+			
+			//entityDescriptionService.save(entity);
 		}
 
-		entityService.save(entities);
 	}
 	
 	private List<EntityDescription> loadEntitiesFromDB(){
-		return Lists.newArrayList(entityService.findAll());
+		return null;//Lists.newArrayList(entityService.findAll());
 	}
 	
 	private List<EntityDescription> loadEntitiesFromEntity() throws IOException, ClassNotFoundException{

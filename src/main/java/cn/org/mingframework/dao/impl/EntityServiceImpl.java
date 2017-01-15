@@ -1,4 +1,4 @@
-package cn.org.mingframework.dao.repository;
+package cn.org.mingframework.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -6,14 +6,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-@Service
-public class EntityServiceImpl<T> implements EntityRepository<T> {
+//@Service
+public class EntityServiceImpl<T> /*implements EntityRepository<T>*/ {
 
-	@Autowired
-	EntityRepository<T> entityRepository;
+	//@Autowired
+	//EntityRepository<T> entityRepository;
 	
 	public Iterable<T> findAll(Sort arg0) {
-		return entityRepository.findAll(arg0);
+		return null;
 	}
 
 	public Page<T> findAll(Pageable arg0) {
@@ -67,7 +67,7 @@ public class EntityServiceImpl<T> implements EntityRepository<T> {
 	}
 
 	public <S extends T> S save(S arg0) {
-		return entityRepository.save(arg0);
+		return null;//entityRepository.save(arg0);
 	}
 
 	public <S extends T> Iterable<S> save(Iterable<S> arg0) {
