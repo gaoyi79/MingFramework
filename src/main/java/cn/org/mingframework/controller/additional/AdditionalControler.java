@@ -1,4 +1,4 @@
-package cn.org.mingframework.control.additional;
+package cn.org.mingframework.controller.additional;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,12 +34,14 @@ public class AdditionalControler {
 	@RequestMapping(value = "/page")
 	public ModelAndView getPage(HttpServletRequest request)
 	{
+		System.out.println(getDevice(request));
 		return getPageModelAndView(1).addObject("request", request);
 	}
 	
 	@RequestMapping(value = "/page/id={pageindex}")
 	public ModelAndView getPage(@PathVariable ( "pageindex" ) int pageIndex,HttpServletRequest request)
 	{
+		System.out.println(getDevice(request));
 		return getPageModelAndView(pageIndex).addObject("request", request);
 	}
 	
@@ -61,6 +63,8 @@ public class AdditionalControler {
 		mv.setViewName("article");
 		mv.addObject("images", images);
 		mv.addObject("request", request);
+		mv.addObject("device", getDevice(request));
+		System.out.println(getDevice(request));
 		return mv;
 	}
 	
@@ -96,8 +100,8 @@ public class AdditionalControler {
 		}
 	}
 	
-	private String getDevice(){
-		Device device = DeviceUtils.
-		return "";
+	private String getDevice(HttpServletRequest request){
+		Device device = DeviceUtils.getCurrentDevice(request);
+		return device.toString()+ "  -  "+device.getDevicePlatform().name();
 	}
 }

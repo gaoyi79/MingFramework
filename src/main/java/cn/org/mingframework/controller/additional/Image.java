@@ -1,4 +1,4 @@
-package cn.org.mingframework.control.additional;
+package cn.org.mingframework.controller.additional;
 
 import java.io.Serializable;
 

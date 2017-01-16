@@ -1,4 +1,4 @@
-package cn.org.mingframework.control;
+package cn.org.mingframework.controller;
 
 import java.util.ArrayList;
 import java.util.List;

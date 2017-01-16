@@ -1,4 +1,4 @@
-package cn.org.mingframework.control.additional;
+package cn.org.mingframework.controller.additional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
