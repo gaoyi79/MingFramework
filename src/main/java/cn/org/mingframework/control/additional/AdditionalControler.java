@@ -18,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.mobile.device.Device;
+import org.springframework.mobile.device.DeviceUtils;
 
 import com.google.common.collect.Lists;
 
@@ -92,5 +94,10 @@ public class AdditionalControler {
 		        return;
 			}
 		}
+	}
+	
+	private String getDevice(){
+		Device device = DeviceUtils.
+		return "";
 	}
 }
