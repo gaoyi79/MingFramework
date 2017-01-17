@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!--
+	<definition name="default" template="/WEB-INF/layouts/default.jspx">
+		<put-attribute name="header" value="/WEB-INF/views/header.jspx" />
+		<put-attribute name="menu" value="/WEB-INF/views/menu.jspx" />
+		<put-attribute name="body_content" value="/WEB-INF/views/body-content.jspx"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+	</definition>
+	
+	<definition name="mainView" extends="default">
+	</definition>
+	
+	<definition name="body_default" template="/WEB-INF/views/body-content.jspx">
+		<put-attribute name="body_content" value="/WEB-INF/views/body-content.jspx"></put-attribute>
+	</definition>
+	-->
+	
+	<definition name="content_mobil" template="/WEB-INF/layouts/mobil/bodydefault.jspx">
+		<put-attribute name="body" value="/WEB-INF/views/mobil/body-content.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="mobil/page"  extends="content_mobil">
+		<put-attribute name="body" value="/WEB-INF/views/example/page.jspx"></put-attribute>
+	</definition>
+	<definition name="mobil/article"  extends="content_mobil">
+		<put-attribute name="body" value="/WEB-INF/views/example/article.jspx"></put-attribute>
+	</definition>
+</tiles-definitions>

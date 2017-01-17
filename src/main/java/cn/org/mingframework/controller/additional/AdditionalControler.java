@@ -35,20 +35,23 @@ public class AdditionalControler {
 	public ModelAndView getPage(HttpServletRequest request)
 	{
 		System.out.println(getDevice(request));
-		return getPageModelAndView(1).addObject("request", request);
+		return getPageModelAndView(1, request).addObject("request", request);
 	}
 	
 	@RequestMapping(value = "/page/id={pageindex}")
 	public ModelAndView getPage(@PathVariable ( "pageindex" ) int pageIndex,HttpServletRequest request)
 	{
 		System.out.println(getDevice(request));
-		return getPageModelAndView(pageIndex).addObject("request", request);
+		return getPageModelAndView(pageIndex, request).addObject("request", request);
 	}
 	
-	private ModelAndView getPageModelAndView(int pageIndex){
+	private ModelAndView getPageModelAndView(int pageIndex, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
 		Page<Article> articlePage = additionalService.listArticle(pageIndex);
-		mv.setViewName("page");
+		if( isMobile(request))
+			mv.setViewName("mobil/page");
+		else
+			mv.setViewName("page");
 		mv.addObject("articles", Lists.newArrayList(articlePage.iterator()));
 		mv.addObject("maxPage", articlePage.getTotalPages() + 1);
 		mv.addObject("currentPage", articlePage.getNumber() + 1);
@@ -103,5 +106,10 @@ public class AdditionalControler {
 	private String getDevice(HttpServletRequest request){
 		Device device = DeviceUtils.getCurrentDevice(request);
 		return device.toString()+ "  -  "+device.getDevicePlatform().name();
+	}
+	
+	private Boolean isMobile(HttpServletRequest request){
+		Device device = DeviceUtils.getCurrentDevice(request);
+		return device.isMobile()||device.isTablet();
 	}
 }

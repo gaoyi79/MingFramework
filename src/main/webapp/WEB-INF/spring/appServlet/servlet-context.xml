@@ -50,6 +50,7 @@ http://www.springframework.org/schema/context/spring-context.xsd
 		<beans:property name="definitions">
 			<beans:list>
 				<beans:value>/WEB-INF/layouts/layouts.xml</beans:value>
+				<beans:value>/WEB-INF/layouts/layouts-mobil.xml</beans:value>
 				<beans:value>/WEB-INF/views/**/views.xml</beans:value>
 			</beans:list>
 		</beans:property>
