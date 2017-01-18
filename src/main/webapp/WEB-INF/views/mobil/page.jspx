@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:joda="http://www.joda.org/joda/time/tags"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<c:forEach var="i" begin="${Math.max(Long(1), currentPage - 10)}" end="${Math.min(Long(maxPage), currentPage + 10)}">
+		<c:if test="${currentPage == i}">${i}&#160;&#160;</c:if>
+		<c:if test="${currentPage != i}">
+			<a href="${request.getContextPath()}/page/id=${i}">${i}&#160;&#160;</a>
+		</c:if>
+	</c:forEach>
+	<c:if test="${not empty articles}">
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>By User</th>
+					<th>Grade</th>
+					<th>Downloadd</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${articles}" var="article">
+					<tr>
+						<!-- /article/id={articleid} -->
+						<td><a href="${request.getContextPath()}/article/id=${article.articleId}" target="_blank">${article.title}</a></td>
+						<td>${article.byUser}</td>
+						<td>---${article.grade}---</td>
+						<td>---${article.downloaded}---</td>
+						<td><joda:format value="${article.createDate}" pattern="yyyy-MM-dd"/></td>
+						<!-- td><fmt:formatDate pattern="yyyy-MM-dd" value="${article.createDate}" /></td-->
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</c:if>
+</div>

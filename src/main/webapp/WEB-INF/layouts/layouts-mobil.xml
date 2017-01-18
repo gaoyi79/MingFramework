@@ -24,7 +24,7 @@
 	</definition>
 	
 	<definition name="mobil/page"  extends="content_mobil">
-		<put-attribute name="body" value="/WEB-INF/views/example/page.jspx"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/mobil/page.jspx"></put-attribute>
 	</definition>
 	<definition name="mobil/article"  extends="content_mobil">
 		<put-attribute name="body" value="/WEB-INF/views/example/article.jspx"></put-attribute>
