@@ -23,6 +23,8 @@ import org.springframework.mobile.device.DeviceUtils;
 
 import com.google.common.collect.Lists;
 
+import cn.org.mingframework.system.MingModelAndView;
+
 @Controller
 public class AdditionalControler {
 
@@ -46,7 +48,7 @@ public class AdditionalControler {
 	}
 	
 	private ModelAndView getPageModelAndView(int pageIndex, HttpServletRequest request){
-		ModelAndView mv = new ModelAndView();
+		MingModelAndView mv = new MingModelAndView();
 		Page<Article> articlePage = additionalService.listArticle(pageIndex);
 		if( isMobile(request))
 			mv.setViewName("mobil/page");
