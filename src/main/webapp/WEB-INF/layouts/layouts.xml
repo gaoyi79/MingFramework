@@ -3,6 +3,35 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+	<!-- Normal device layout -->
+	<definition name="normal/default" template="/WEB-INF/layouts/normal/default.jspx">
+		<put-attribute name="header" value="/WEB-INF/layouts/normal/header.jspx" />
+		<put-attribute name="menu" value="/WEB-INF/layouts/normal/menu.jspx" />
+		<put-attribute name="body" value="/WEB-INF/layouts/normal/body.jspx"/>
+		<put-attribute name="footer" value="/WEB-INF/layouts/normal/footer.jspx" />
+	</definition>
+	
+	<definition name="normal/main" extends="default">
+	</definition>
+	
+	<definition name="normal/content" template="/WEB-INF/layouts/bodydefault.jspx">
+		<put-attribute name="body" value="/WEB-INF/layouts/normal/body.jspx"/>
+	</definition>
+	
+	<definition name="normal/queryframe"  extends="normal/content">
+		<put-attribute name="body" value="/WEB-INF/layouts/normal/query.jspx"/>
+	</definition>
+	
+	<definition name="normal/query"  extends="normal/queryframe">
+		<put-attribute name="title" expression="${title}"/>
+		<put-attribute name="query.condition" expression="/WEB-INF/views/${condition}.jspx"/>
+		<put-attribute name="query.tools" expression="/WEB-INF/views/${tools}.jspx"/>
+		<put-attribute name="query.list" expression="/WEB-INF/views/${list}.jspx"/>
+	</definition>
+	
+	
+	
+	<!-- No use -->
 	<definition name="default" template="/WEB-INF/layouts/default.jspx">
 		<put-attribute name="header" value="/WEB-INF/views/header.jspx" />
 		<put-attribute name="menu" value="/WEB-INF/views/menu.jspx" />
@@ -25,11 +54,17 @@
 		<put-attribute name="body" value="/WEB-INF/views/example/edit.jspx"></put-attribute>
 	</definition>
 	
-	
 	<definition name="page"  extends="content">
 		<put-attribute name="body" value="/WEB-INF/views/example/page.jspx"></put-attribute>
 	</definition>
 	<definition name="article"  extends="content">
 		<put-attribute name="body" value="/WEB-INF/views/example/article.jspx"></put-attribute>
 	</definition>
+	
+	<!-- Tablet device layouts -->
+	
+	
+	<!-- Mobil device layouts -->
+	
+	
 </tiles-definitions>

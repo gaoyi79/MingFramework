@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<div>
+	<h6><tiles:insertAttribute name="title" ignore="true"/></h6>
+	<div><tiles:insertAttribute name="query.condition" ignore="true" /></div>
+	<div><tiles:insertAttribute name="query.tool" ignore="true" /></div>
+	<div><tiles:insertAttribute name="query.list" ignore="true" /></div>
+</div>
