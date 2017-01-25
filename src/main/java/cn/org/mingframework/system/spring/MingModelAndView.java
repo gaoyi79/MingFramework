@@ -1,4 +1,4 @@
-package cn.org.mingframework.system;
+package cn.org.mingframework.system.spring;
 
 import javax.servlet.http.HttpServletRequest;
 

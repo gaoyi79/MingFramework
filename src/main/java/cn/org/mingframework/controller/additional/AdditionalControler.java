@@ -23,7 +23,7 @@ import org.springframework.mobile.device.DeviceUtils;
 
 import com.google.common.collect.Lists;
 
-import cn.org.mingframework.system.MingModelAndView;
+import cn.org.mingframework.system.spring.MingModelAndView;
 
 @Controller
 public class AdditionalControler {

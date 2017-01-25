@@ -1,32 +1,21 @@
 package cn.org.mingframework.service.system;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Lists;
-
-import cn.org.mingframework.dao.impl.EntityDaoImpl;
-import cn.org.mingframework.dao.interfaces.BaseService;
-import cn.org.mingframework.dao.interfaces.EntityDao;
-import cn.org.mingframework.dao.interfaces.EntityService;
 import cn.org.mingframework.model.entity.system.database.EntityDescription;
+import cn.org.mingframework.model.entity.system.database.FieldDescription;
 
 //@Service
 public class EntityScan {
@@ -63,8 +52,6 @@ public class EntityScan {
 			System.out.print("Entity Name:" + entity.getEntityName());
 			System.out.print("; Class Name:" + entity.getClassName());
 			System.out.print("; Table Name:" + entity.getTableName());
-			
-			//entityDescriptionService.save(entity);
 		}
 
 	}
@@ -95,10 +82,26 @@ public class EntityScan {
 			else{
 				entity.setTableName(entity.getEntityName());	
 			}
+			getFields(entity);
 			
 			entities.add(entity);
 		}
 		
 		return entities;
+	}
+	
+	private void getFields(EntityDescription entity) throws SecurityException, ClassNotFoundException{
+		List<FieldDescription> fieldDescriptions = new ArrayList<FieldDescription>();
+		Field[] fields = Class.forName(entity.getClassName()).getFields();
+		for(Field field : fields){
+			FieldDescription fieldDescription = new FieldDescription();
+			fieldDescription.setEntity(entity);
+			fieldDescription.setFieldName(field.getName());
+			
+			fieldDescriptions.add(fieldDescription);
+		}
+		
+		entity.setFieldDescription(fieldDescriptions);
+		
 	}
 }
