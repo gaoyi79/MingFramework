@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -64,8 +66,19 @@ public class AdditionalControler {
 	public ModelAndView getArticle(@PathVariable ( "articleid" ) String articleId,HttpServletRequest request) throws NamingException
 	{
 		ModelAndView mv = new ModelAndView();
+		Article article = additionalService.findArticleByArticleId(articleId);
 		List<Image> images = additionalService.listImage(articleId);
+		Collections.sort(images, new Comparator<Image>(){
+
+			public int compare(Image o1, Image o2) {
+				if(o1.getItem()>o2.getItem()){
+					return 1;
+				}else{
+					return -1;
+				}
+			}});
 		mv.setViewName("article");
+		mv.addObject("article", article);
 		mv.addObject("images", images);
 		mv.addObject("request", request);
 		mv.addObject("device", getDevice(request));

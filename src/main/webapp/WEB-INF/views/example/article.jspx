@@ -8,12 +8,23 @@
 <style type="text/css">
 	img { max-width: 100%;}
 </style>
-<title>Insert title here</title>
+<spring:url value="/resources/scripts/some.js" var="somejs_url" />
+<script src="${somejs_url}" type="text/javascript">
+	<jsp:text/>
+</script>
+<title>${article.title}</title>
 </head>
 <body>
 	<c:if test="${not empty images}">
 		<c:forEach items="${images}" var="image">
-			<img src="${request.getContextPath()}/showimage/articleid=${image.articleId}&amp;item=${image.item}"/><p/>
+			<c:choose>
+				<c:when test="${image.item le 20}">
+					<img id="image${image.item}" src="${request.getContextPath()}/showimage/articleid=${image.articleId}&amp;item=${image.item}" lazysrc="${request.getContextPath()}/showimage/articleid=${image.articleId}&amp;item=${image.item}" onclick="fnLoad(this)"/><p/>
+				</c:when>
+				<c:otherwise>
+					<img id="image${image.item}" src="${request.getContextPath()}/resources/image/lazy.gif" lazysrc="${request.getContextPath()}/showimage/articleid=${image.articleId}&amp;item=${image.item}" onclick="fnLoad(this)"/><p/>
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
 	</c:if>
 </body>

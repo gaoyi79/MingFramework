@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import cn.org.mingframework.model.entity.system.User;
 
-@Repository
+//@Repository
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 	public User findByUserName(String userName);
 }

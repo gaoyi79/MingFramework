@@ -6,4 +6,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ArticleRepository extends PagingAndSortingRepository<Article, Long> {
 	Page<Article> findAllByDownloaded(int downloaded, Pageable page);
+	Article findByArticleId(String articleId);
 }

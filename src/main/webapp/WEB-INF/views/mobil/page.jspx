@@ -19,7 +19,8 @@
 					<th>Title</th>
 					<th>By User</th>
 					<th>Grade</th>
-					<th>Downloadd</th>
+					<th>Count</th>
+					<th>Date</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,7 +30,7 @@
 						<td><a href="${request.getContextPath()}/article/id=${article.articleId}" target="_blank">${article.title}</a></td>
 						<td>${article.byUser}</td>
 						<td>---${article.grade}---</td>
-						<td>---${article.downloaded}---</td>
+						<td>---${article.piccount}---</td>
 						<td><joda:format value="${article.createDate}" pattern="yyyy-MM-dd"/></td>
 						<!-- td><fmt:formatDate pattern="yyyy-MM-dd" value="${article.createDate}" /></td-->
 					</tr>

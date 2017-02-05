@@ -26,4 +26,8 @@ public class AdditionalServiceImpl implements AdditionalService {
 	public List<Image> listImage(String articleid) {
 		return (List<Image>) imageRepository.findAllByArticleId(articleid);
 	}
+
+	public Article findArticleByArticleId(String articleId) {
+		return articleRepository.findByArticleId(articleId);
+	}
 }
