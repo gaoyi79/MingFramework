@@ -20,6 +20,8 @@ public class User implements Serializable {
 	private Long id;
 	private String userName;
 	private String password;
+	private String salt;
+	private Boolean locked = Boolean.FALSE;
 	private Set<UserGroup> loginGroups = new HashSet<UserGroup>();
 	private int version;
 	
@@ -51,6 +53,23 @@ public class User implements Serializable {
 		this.password = password;
 	}
 	
+	@Column(length = 100)
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+	
+	public Boolean getLocked() {
+		return locked;
+	}
+
+	public void setLocked(Boolean locked) {
+		this.locked = locked;
+	}
+
 	@Version
 	public int getVersion() {
 		return version;

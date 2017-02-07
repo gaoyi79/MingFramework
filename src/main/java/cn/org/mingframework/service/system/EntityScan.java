@@ -13,11 +13,12 @@ import javax.transaction.Transactional;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.stereotype.Service;
 
 import cn.org.mingframework.model.entity.system.database.EntityDescription;
 import cn.org.mingframework.model.entity.system.database.FieldDescription;
 
-//@Service
+@Service
 public class EntityScan {
 	private String packageName = "cn/org/mingframework/model/entity";
 

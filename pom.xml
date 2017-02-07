@@ -26,7 +26,7 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- Spring framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -63,7 +63,7 @@
 			<artifactId>spring-mobile-device</artifactId>
 			<version>1.1.5.RELEASE</version>
 		</dependency>
-		
+
 		<!-- Javax -->
 		<dependency>
 			<groupId>javax.annotation</groupId>
@@ -86,7 +86,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -108,7 +108,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.2.4.Final</version>
 		</dependency>
-		
+
 		<!-- JDBC -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -120,7 +120,7 @@
 			<artifactId>sqljdbc4</artifactId>
 			<version>4.0</version>
 		</dependency>
-		
+
 		<!-- Others -->
 		<dependency>
 			<groupId>org.jadira.usertype</groupId>
@@ -152,7 +152,7 @@
 			<artifactId>xml-apis</artifactId>
 			<version>1.0.b2</version>
 		</dependency>
-		
+
 		<!-- Tiles -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -169,11 +169,26 @@
 			<artifactId>tiles-autotag-core-runtime</artifactId>
 			<version>1.1.0</version>
 		</dependency>
-		
+
 		<!-- Shiro -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
 			<version>1.2.3</version>
 		</dependency>
 	</dependencies>
