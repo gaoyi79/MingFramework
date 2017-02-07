@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
@@ -157,6 +158,7 @@ public class User implements Serializable {
 		return "User [userName=" + userName + "]";
 	}
 
+	@Transient
 	public String getCredentialsSalt(){
 		return getSalt() + this.getUserName() + this.getSalt();
 	}
