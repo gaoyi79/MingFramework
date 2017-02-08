@@ -1,7 +1,10 @@
 package cn.org.mingframework.model.entity.system;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,17 +15,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "SYS_User")
+@Table(name = "SYS_User",
+	uniqueConstraints = {@UniqueConstraint(columnNames = { "username"})})
 public class User implements Serializable {
 	private Long id;
 	private String userName;
 	private String password;
 	private String salt;
+	private int hashIterations;
 	private Boolean locked = Boolean.FALSE;
-	private Set<UserGroup> loginGroups = new HashSet<UserGroup>();
+	private List<UserGroup> loginGroups = new ArrayList<UserGroup>();
+	private List<UserRole> userRoles = new ArrayList<UserRole>();
 	private int version;
 	
 	@Id
@@ -70,6 +77,32 @@ public class User implements Serializable {
 		this.locked = locked;
 	}
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	public List<UserGroup> getLoginGroups() {
+		return loginGroups;
+	}
+
+	public void setLoginGroups(List<UserGroup> loginGroups) {
+		this.loginGroups = loginGroups;
+	}
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	public List<UserRole> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(List<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+
+	public int getHashIterations() {
+		return hashIterations;
+	}
+
+	public void setHashIterations(int hashIterations) {
+		this.hashIterations = hashIterations;
+	}
+
 	@Version
 	public int getVersion() {
 		return version;
@@ -78,10 +111,20 @@ public class User implements Serializable {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-
-	@OneToMany(mappedBy = "login", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	public Set<UserGroup> getGroups() {
-		return loginGroups;
+	
+	public void addRole(Role role){
+		UserRole userRole = new UserRole(this, role);
+		
+		this.userRoles.add(userRole);
+	}
+	
+	public void addRoles(Collection<Role> roles){
+		List<UserRole> userRoles = new ArrayList<UserRole>();
+		for(Role role : roles){
+			UserRole userRole = new UserRole(this, role);
+			userRoles.add(userRole);
+		}
+		this.userRoles.addAll(userRoles);
 	}
 
 	@Override
@@ -108,14 +151,13 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-
-	public void setGroups(Set<UserGroup> loginGroups) {
-		this.loginGroups = loginGroups;
-	}
 	
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + "]";
 	}
 
+	public String getCredentialsSalt(){
+		return getSalt() + this.getUserName() + this.getSalt();
+	}
 }

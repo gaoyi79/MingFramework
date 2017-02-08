@@ -2,6 +2,7 @@ package cn.org.mingframework.model.entity.system;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,11 +12,11 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "SYS_UserRole")
-public class UserRole implements Serializable {
+@Table(name = "SYS_RolePermission")
+public class RolePermission implements Serializable {
 	private Long id;
-	private User user;
 	private Role role;
+	private String permission;
 	
 	private int version;
 
@@ -30,16 +31,6 @@ public class UserRole implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "userid")
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	@ManyToOne
 	@JoinColumn(name = "roleid")
 	public Role getRole() {
 		return role;
@@ -47,6 +38,15 @@ public class UserRole implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	@Column(length = 100)
+	public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
 	}
 
 	@Version
@@ -58,13 +58,13 @@ public class UserRole implements Serializable {
 		this.version = version;
 	}
 
-	public UserRole(User user, Role role) {
+	public RolePermission(Role role, String permission) {
 		super();
-		this.user = user;
 		this.role = role;
+		this.permission = permission;
 	}
 
-	public UserRole() {
+	public RolePermission() {
 		super();
 	}
 	

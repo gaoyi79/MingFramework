@@ -36,11 +36,11 @@ public class UserGroup implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "userid")
-	public User getLogin() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setLogin(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
